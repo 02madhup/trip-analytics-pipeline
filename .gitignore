@@ -1,0 +1,32 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+crash.*.log
+.terraform.lock.hcl
+
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Environment / secrets
+.env
+*.pem
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
