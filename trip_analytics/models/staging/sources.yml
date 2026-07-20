@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    database: TRIP_ANALYTICS
+    schema: staging
+    tables:
+      - name: raw_bangalore_flights
+        description: Live aircraft state vectors polled from OpenSky Network, filtered to Bangalore airspace
+        loaded_at_field: polled_at
+        freshness:
+          warn_after: {count: 10, period: minute}
+          error_after: {count: 30, period: minute}
+        columns:
+          - name: icao24
+            tests:
+              - not_null

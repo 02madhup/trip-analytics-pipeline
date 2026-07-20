@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: stg_flight_positions
+    description: Cleaned, typed flight position records polled from OpenSky, filtered to Bangalore airspace
+    columns:
+      - name: icao24
+        description: Unique 24-bit ICAO transponder address for the aircraft
+        tests:
+          - not_null
+
+  - name: latest_aircraft_positions
+    description: One row per aircraft, showing its most recently known position
+    columns:
+      - name: icao24
+        tests:
+          - not_null
+          - unique
+      - name: latitude
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 12.75
+              max_value: 13.25
+              config:
+                severity: warn
+      - name: longitude
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 77.35
+              max_value: 77.85
+              config:
+                severity: warn
